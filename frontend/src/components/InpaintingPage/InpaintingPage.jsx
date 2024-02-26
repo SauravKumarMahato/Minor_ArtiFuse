@@ -50,10 +50,19 @@ const InpaintingPage = () => {
 
     return (
         <>
-            <h1 className="text-4xl my-10">Remove small deformities in our image</h1>
+            <h1 className="animated-heading">
+           
+                <span>Remove</span>
+              
+                <span> </span>
+                <span>Deformities</span>
+                <span> </span>
+                <span>Here!</span>                       
+            
+            </h1>
 
             <div className="flex gap-10">
-                <div className='border-2 border-gray-900 w-[45vh] h-[45vh] grid align-middle justify-center p-7'>
+                <div className='border-2 border-gray-900 w-[55vh] h-[55vh] grid align-middle justify-center p-8'>
                     {imageUrl ? (
                         <div className="">
 
@@ -75,8 +84,8 @@ const InpaintingPage = () => {
 
                             <div className='flex gap-4 justify-center'>
                                 <button onClick={()=> {}} className="text-2xl mt-10 border-2 rounded-xl bg-green-500 px-4 py-2">Re-Upload</button>
-                                <button className="text-2xl mt-10 border-2 rounded-xl bg-green-500 px-4 py-2">Mask</button>
-                                <button className="text-2xl mt-10 border-2 rounded-xl bg-green-500 px-4 py-2">Undo</button>
+                                <button className="text-2xl mt-10 border-2 rounded-xl bg-green-500 px-5 py-2">Mask</button>
+                                <button className="text-2xl mt-10 border-2 rounded-xl bg-green-500 px-5 py-2">Undo</button>
                             </div>
                         </div>
                     ) : (

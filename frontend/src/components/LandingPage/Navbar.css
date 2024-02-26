@@ -1,0 +1,131 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap'); /* Import Google Fonts */
+
+
+
+
+
+
+@keyframes titleAnimation {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+
+  #navbar {
+    list-style-type: none;
+    margin: 0; /* Set margin to 0 */
+    padding: 1px 0; /* Remove fixed padding */
+    background-color: #0f6eea; /* Navbar background color */
+    overflow: hidden;
+    border-radius: 10px; /* Adjust border radius as needed */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box-shadow with appropriate values */
+  }
+  
+
+#navbar li {
+  float: right;
+}
+
+#navbar li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 15px 20px;
+  text-decoration: none;
+}
+
+#navbar li a:hover {
+  background-color: #090808;
+}
+
+/* Add background image to the paragraph container */
+.paragraph-container {
+  
+    padding: 30px; /* Adjust padding as needed */
+  }
+  
+  /* Style for the paragraph */
+  .paragraph-text {
+    font-family: 'Roboto', sans-serif; /* Change font */
+    font-size: 20px; /* Change font size */
+    color: #2076d8; /* Change text color */
+    animation: paragraphAnimation 1s ease-in-out infinite alternate; /* Add animation */
+  }
+  
+  .button_ui{
+    color: #d8e2ef;
+    padding: 40px;
+    
+  }
+  @keyframes paragraphAnimation {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.1);
+    }
+  }
+  /* styles.css */
+  .navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  
+  .logo-title-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 150px; /* Adjust the width of the logo as needed */
+    height: auto;
+    
+    margin-right: 10px; /* Adjust the margin between the logo and the title */
+  }
+  .images{
+    height: 400px;
+    width: 600px;
+    /* align-items: center; */
+    margin-left:320px;
+    
+  }
+
+  body {
+    background-image: url('../../assets/images/like.avif');
+    background-size: cover; /* Adjust as needed */
+    background-repeat: no-repeat;
+}
+  .animated-heading {
+    font-size: 4rem;
+    animation: grow 2s infinite alternate;
+}
+
+
+/* Define different font styles for each letter */
+.animated-heading span:nth-child(1) {
+    font-family: Courier New;
+    color: rgb(44, 118, 238);
+}
+.animated-heading span:nth-child(2) {
+    font-family: Courier New;
+    color: rgb(44, 118, 238);
+}
+.animated-heading span:nth-child(3) {
+  font-family: Courier New;
+  color: rgb(44, 118, 238);
+}
+.animated-heading span:nth-child(4) {
+  font-family: Courier New;
+  color: rgb(44, 118, 238);
+}
+
+
+

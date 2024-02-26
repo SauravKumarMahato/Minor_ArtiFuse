@@ -1,7 +1,11 @@
 import { useNavigate } from "react-router-dom";
 import { Carousel } from 'flowbite-react';
-
-
+import "./Navbar.css";
+import first from "../../assets/images/first.png";
+import second from "../../assets/images/second.png";
+import third from "../../assets/images/third.png";
+import four from "../../assets/images/four.png";
+import fifth from "../../assets/images/fifth.png";
 const LandingPage = () => {
 
     const navigate = useNavigate();
@@ -12,29 +16,38 @@ const LandingPage = () => {
 
     return (
         <>
-            <h1 className="text-5xl my-10"> ArtiFuse</h1>
-
-            <div className="grid grid-cols-2 gap-10">
-
-                <div>
-                    <h1 className="text-2xl text-left">Our image inpainting tool utilizes advanced algorithms to seamlessly reconstruct missing or damaged portions of images. By analyzing surrounding pixels and structures, it intelligently fills in the gaps, effectively restoring the visual integrity of the image. This versatile tool is invaluable for retouching photographs, removing unwanted objects, or repairing old and damaged images with precision and efficiency. </h1>
-                    <button onClick={handleClick} className="text-2xl mt-10 border-2 rounded-xl bg-green-500 px-4 py-2">Image Inpainting</button>
+<h1 className="animated-heading">
+                <span>A</span>
+                <span>r</span>
+                <span>t</span>
+                <span>i</span>
+                <span>F</span>
+                <span>u</span>
+                <span>s</span>
+                <span>e</span>
+            </h1>
+            <div className="paragraph-text">
+                  <p>Welcome to ArtiFuse, an image inpainting tool that utilizes advanced algorithms to seamlessly reconstruct missing or damaged portions of your images. By analyzing surrounding pixels and structures, it intelligently fills in the gaps, effectively restoring the visual integrity of the image. This versatile tool is invaluable for retouching photographs, removing unwanted objects, or repairing old and damaged images with precision and efficiency. </p>
+                <p></p>
+                </div>
+                   <div>
+                    <button onClick={handleClick} className="text-2xl mt-10 border-2 rounded-xl bg-blue-500 px-4 py-2">Image Inpainting</button>
 
                 </div>
 
-                <div>
+                
 
-                    <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+                    <div className="images">
                         <Carousel slide={false}>
-                            <img src="https://flowbite.com/docs/images/carousel/carousel-1.svg" alt="..." />
-                            <img src="https://flowbite.com/docs/images/carousel/carousel-2.svg" alt="..." />
-                            <img src="https://flowbite.com/docs/images/carousel/carousel-3.svg" alt="..." />
-                            <img src="https://flowbite.com/docs/images/carousel/carousel-4.svg" alt="..." />
-                            <img src="https://flowbite.com/docs/images/carousel/carousel-5.svg" alt="..." />
+                            <img src={third} alt="First" />
+                            <img src={second} alt="..." />
+                            <img src={first} alt="..." />
+                            <img src={four} alt="..." />
+                            <img src={fifth} alt="..." />
                         </Carousel>
-                    </div>
+                    
 
-                </div>
+                
             </div>
         </>
     );

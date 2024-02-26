@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+.heading-container {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.heading-container.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.text-5xl {
+    font-family: 'Cambria', cursive; /* Change to a stylish font */
+    font-size: 7rem; /* Increase font size for bigger text */
+    margin-top: 2rem;
+    color: #6173ff; /* Change color as needed */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add a text shadow for visual effect */
+  }
+  
