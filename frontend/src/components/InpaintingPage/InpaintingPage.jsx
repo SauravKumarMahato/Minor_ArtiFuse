@@ -1,36 +1,15 @@
 import { useEffect, useState, useRef } from 'react';
 import { FileInput, Label } from 'flowbite-react';
 import axios from 'axios';
-
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const InpaintingPage = () => {
-    // const [imageUrl, setImageUrl] = useState(null);
     const [brushSize, setBrushSize] = useState(10);
     const [isDrawing, setIsDrawing] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
+    const [drawingHistory, setDrawingHistory] = useState([]);
     const canvasRef = useRef(null);
-
-  const handleFileUpload = (e) => {
-    const file = e.target.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setSelectedImage(reader.result);
-            };
-            reader.readAsDataURL(file);
-        }
-  };
-
-    // const handleFileUpload = (event) => {
-    //     const file = event.target.files[0];
-    //     if (file) {
-    //         const reader = new FileReader();
-    //         reader.onloadend = () => {
-    //             setImageUrl(reader.result);
-    //         };
-    //         reader.readAsDataURL(file);
-    //     }
-    // };
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (selectedImage) {
@@ -74,17 +53,52 @@ const InpaintingPage = () => {
         ctx.stroke();
     };
 
-    // const endDrawing = () => {
-    //     setIsDrawing(false);
-    // };
-
     const endDrawing = () => {
         setIsDrawing(false);
-
-        // uploadImage();
-
+        const canvas = canvasRef.current;
+        const imageData = canvas.toDataURL('image/png');
+        setDrawingHistory(prevHistory => [...prevHistory, imageData]);
     };
 
+    const undoDrawing = () => {
+        setDrawingHistory(prevHistory => {
+            const updatedHistory = [...prevHistory];
+            updatedHistory.pop();
+            return updatedHistory;
+        });
+        redrawCanvas();
+    };
+
+    const redrawCanvas = () => {
+        const canvas = canvasRef.current;
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        // if (selectedImage) {
+            const img = new Image();
+            img.src = drawingHistory[drawingHistory.length - 1];
+             img.onload = () => {
+                canvas.width = img.width;
+                canvas.height = img.height;
+                ctx.drawImage(img, 0, 0);
+            };
+        // }
+    };
+
+    const handleFileUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setSelectedImage(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleReload = () => {
+        setSelectedImage(null);
+        navigate('/inpainting');
+    };
 
     const uploadImage = async () => {
         // Save the canvas drawing as an image
@@ -112,20 +126,16 @@ const InpaintingPage = () => {
 
     return (
         <>
-
             <h1 className="text-4xl my-10">Remove small deformities in our image</h1>
-
             <div className="flex gap-10">
                 <div className='border-2 border-gray-900 w-[45vh] h-[45vh] grid align-middle justify-center p-7'>
                     {selectedImage ? (
                         <div className="">
-
                             <div className="absolute top-0 right-0 p-2">
-
                             </div>
                             <canvas
                                 ref={canvasRef}
-                                className="cursor-pointer "
+                                className="cursor-pointer"
                                 onMouseDown={startDrawing}
                                 onMouseMove={draw}
                                 onMouseUp={endDrawing}
@@ -139,12 +149,10 @@ const InpaintingPage = () => {
                                 onChange={(e) => setBrushSize(parseInt(e.target.value))}
                             />
                             <label>Brush Size: {brushSize}</label>
-
                             <div className='flex gap-4 justify-center'>
-
-                                <button onClick={() => { }} className="text-2xl border-2 rounded-xl bg-green-500 px-4 py-2">Re-Upload</button>
-                                <button onClick={uploadImage} className="text-2xl  border-2 rounded-xl bg-green-500 px-4 py-2">Fix Image</button>
-                                <button className="text-2xl  border-2 rounded-xl bg-green-500 px-4 py-2">Undo</button>
+                                <button onClick={handleReload} className="text-2xl border-2 rounded-xl bg-green-500 px-4 py-2">Re-Upload</button>
+                                <button onClick={uploadImage} className="text-2xl border-2 rounded-xl bg-green-500 px-4 py-2">Fix Image</button>
+                                <button onClick={undoDrawing} className="text-2xl border-2 rounded-xl bg-green-500 px-4 py-2">Undo</button>
                             </div>
                         </div>
                     ) : (
@@ -184,7 +192,7 @@ const InpaintingPage = () => {
                         </div>
                     )}
                 </div>
-                <div>
+                <div className='border-2 border-gray-900 w-[45vh] h-[45vh] grid align-middle justify-center p-7'>
                     <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
                         {/* Placeholder for Inpainted image */}
                     </div>
@@ -195,43 +203,3 @@ const InpaintingPage = () => {
 };
 
 export default InpaintingPage;
-
-
-// import React, { useState } from 'react';
-// import axios from 'axios';
-
-// function Inpainting() {
-//   const [selectedImage, setSelectedImage] = useState(null);
-
-//   const handleImageChange = (e) => {
-//     setSelectedImage(e.target.files[0]);
-//   };
-
-//   const handleInpainting = async () => {
-//     const formData = new FormData();
-//     formData.append('image', selectedImage);
-//     console.log(selectedImage);
-
-//     try {
-//       const response = await axios.post('http://localhost:8000/upload-image', formData, {
-//         headers: {
-//           'Content-Type': 'multipart/form-data',
-//         },
-//       });
-//       console.log('Image uploaded successfully:', response.data);
-//       // You can do something with the response here if needed
-//     } catch (error) {
-//       console.error('Error uploading image:', error);
-//     }
-//   };
-
-//   return (
-//     <div>
-//       <input type="file" accept="image/*" onChange={handleImageChange} />
-//       <button onClick={handleInpainting}>Upload Image</button>
-//     </div>
-//   );
-// }
-
-// export default Inpainting;
-
