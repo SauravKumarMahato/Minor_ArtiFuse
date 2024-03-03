@@ -58,7 +58,7 @@ const LandingPage = () => {
                         <div className="row">
 
                             <div className="col-12 text-center">
-                                <h2 className="font-bold text-4xl mb-5 mt-12">Get started with Image <span>Inpaining</span></h2>
+                                <h2 className="font-bold text-4xl mb-5 mt-12">Get started with Image <span>Inpainting</span></h2>
                             </div>
 
                             <div className="col-lg-2 col-12 mt-auto mb-auto">
