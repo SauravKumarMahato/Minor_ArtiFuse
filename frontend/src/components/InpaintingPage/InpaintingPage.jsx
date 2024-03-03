@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom';
 import inpaintedImage from '../../../../api/generated_image.jpg'
 import bgImage from '../../assets/images/background.jpeg'
+import Footer from '../Footer/Footer';
 
 const InpaintingPage = () => {
     const [brushSize, setBrushSize] = useState(10);
@@ -163,7 +164,8 @@ const InpaintingPage = () => {
     return (
         <>
             <div >
-                <h1 className="text-4xl mb-10 mt-6 ">Remove small deformities from your image</h1>
+                
+                <h1 className="text-4xl mb-10 mt-20 text-center ">Remove small deformities from your image</h1>
                 <div className="flex gap-10 justify-center items-center">
                     <div className='border-2 border-gray-900  grid align-middle justify-center p-7'>
                         {selectedImage ? (
@@ -246,6 +248,8 @@ const InpaintingPage = () => {
                     </div>
                 </div>
             </div>
+
+            <Footer/>
         </>
 
     );
