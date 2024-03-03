@@ -5,6 +5,8 @@ import image2 from '../../assets/images/2.jpeg'
 import image3 from '../../assets/images/3.jpeg'
 import image4 from '../../assets/images/4.jpeg'
 import image5 from '../../assets/images/5.jpeg'
+import logo from '../../assets/images/logo.png'
+
 
 const LandingPage = () => {
     const navigate = useNavigate();
@@ -15,7 +17,11 @@ const LandingPage = () => {
 
     return (
         <>
-            <h1 className="text-5xl my-10"> ArtiFuse</h1>
+
+            <div className="flex">
+                <img src={logo} alt="logo here" width={150} height={150} srcSet="" />
+                <h1 className="text-5xl my-10"> ArtiFuse</h1>
+            </div>
 
             <div className="grid grid-cols-2 gap-10">
                 <div>
@@ -33,7 +39,7 @@ const LandingPage = () => {
                         </Carousel>
                     </div>
                 </div>
-            </div>  
+            </div>
         </>
     );
 }
