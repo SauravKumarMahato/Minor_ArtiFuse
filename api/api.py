@@ -1,13 +1,22 @@
-from fastapi import FastAPI, UploadFile, File
+from fastapi import FastAPI
 import uvicorn
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 import os   
 
-from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 import base64
-from uuid import uuid4
+
+
+from PIL import Image
+from numpy import asarray
+import cv2
+import numpy as np
+from keras.models import load_model
+from numpy.random import randint
+
+image_horizontal=128
+image_vertical=128
 
 
 # # Create a list of allowed origins
@@ -24,25 +33,97 @@ app.add_middleware(
 )
 
 
-# @app.post("/upload-video")
-# async def upload_video(video: UploadFile = File(...)):
-#     try:
-#         content = await video.read()
-
-#         # # Save the video file (replace with your desired logic)
-#         # with open(f"uploads/{video.filename}", "wb") as f:
-#         #     f.write(content)
-#         print(video.filename)
-#         return {"message": "Video uploaded successfully!"}
-
-#     except Exception as e:
-#         return {"message": f"An error occurred: {str(e)}"}
-
-class Image(BaseModel):
+class ImageBaseModel(BaseModel):
     image_url: str
 
+def load_and_resize_images(folder_path, target_size=(image_horizontal, image_vertical)):
+    images_list = []
+    for filename in os.listdir(folder_path):
+        # Check if the file is an image file
+        if filename.endswith(('.png', '.jpg', '.jpeg')):
+            file_path = os.path.join(folder_path, filename)
+            try:
+                # Open the image file
+                img = Image.open(file_path)
+                # Resize the image
+                img_resized = img.resize(target_size)
+                # Convert image to array
+                img_array = np.array(img_resized)
+                # Append the image array to the list
+                images_list.append(img_array)
+            except Exception as e:
+                print(f"Error loading {filename}: {e}")
+    return asarray(images_list)
+
+def preprocess_data(data):
+    # load compressed arrays
+    # unpack arrays
+    X1 = data[0]
+    # scale from [0,255] to [-1,1]
+    X1 = (X1 - 127.5) / 127.5
+    return [X1, ]
+
+
+def get_inpainted_image():
+    folder_path = "./uploads"
+    # Example usage
+    images = load_and_resize_images(folder_path)
+
+    # Check the number of images loaded
+    print(f"Number of images loaded: {len(images)}")
+    print('Loaded: ', images.shape)
+
+    model = load_model('./model/Model.h5')
+
+    # Assuming you have defined `images` variable with your image data
+    data = [images, ]
+
+    testing_dataset = preprocess_data(data)
+
+    [X1, ] = testing_dataset
+    # select random example
+    ix = randint(0, len(X1), 1)
+    image = X1[ix]
+
+    # Ensure image has only 3 channels (RGB)
+    image = image[..., :3]  # Keep only the first three channels
+
+    # generate image from source
+    gen_image = model.predict(image)
+    # plot_images(image, gen_image)
+
+    # Ask user if they want to save the generated image in JPG format
+    save_as_jpg = True
+
+    if save_as_jpg:
+        # Specify the folder path where you want to save the image
+        save_folder = "./"
+
+        # Convert the generated image to JPG format
+        gen_image_jpg = ((gen_image[0] + 1) * 127.5).astype(np.uint8)  # Rescale and convert to uint8
+        # Rearrange channels from BGR to RGB
+        gen_image_jpg = cv2.cvtColor(gen_image_jpg, cv2.COLOR_BGR2RGB)
+
+        # Construct the full file path including the folder and file name
+        save_path = os.path.join(save_folder, "generated_image.jpg")
+
+        # Check if the file already exists
+        if os.path.exists(save_path):
+            os.remove(save_path)  # Remove the existing file
+
+        # Save the image as JPG
+        cv2.imwrite(save_path, gen_image_jpg)
+
+        print(f"Generated image saved as '{save_path}'")
+    else:
+        print("Invalid input. Please enter 'yes' or 'no'.")
+
+
+
+
+
 @app.post("/upload-image")
-async def upload_image(image: Image):
+async def upload_image(image: ImageBaseModel):
     try:
         # print(f"The content of string is: {image.image_url}")
         
@@ -67,9 +148,13 @@ async def upload_image(image: Image):
         # Save the image file
         with open(os.path.join(upload_folder, filename), "wb") as f:
             f.write(image_bytes)
+
+        get_inpainted_image()
         return {"message": "Image uploaded successfully!"}
 
+
     except Exception as e:
+        print("error occured")
         return JSONResponse(status_code=500, content={"message": f"An error occurred: {str(e)}"})
 
 # Run the FastAPI server
