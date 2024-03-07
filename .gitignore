@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 
 my_env
+
+*.h5
+api/generated_image.jpg
+api/uploads/input_image.png
