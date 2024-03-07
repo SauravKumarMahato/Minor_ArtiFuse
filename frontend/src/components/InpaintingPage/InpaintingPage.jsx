@@ -5,6 +5,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import inpaintedImage from '../../../../api/generated_image.jpg'
 import bgImage from '../../assets/images/background.jpeg'
 import Footer from '../Footer/Footer';
+import Loader from '../Loader/Loader';
 
 const InpaintingPage = () => {
     const [brushSize, setBrushSize] = useState(10);
@@ -12,6 +13,8 @@ const InpaintingPage = () => {
     const [selectedImage, setSelectedImage] = useState(null);
     const [drawingHistory, setDrawingHistory] = useState([]);
     const [outputImage, setOutputImage] = useState(false);
+    const [loader, setLoader] = useState(false);
+
     const canvasRef = useRef(null);
     const navigate = useNavigate();
 
@@ -123,15 +126,18 @@ const InpaintingPage = () => {
         const canvas = canvasRef.current;
         const imageData = canvas.toDataURL('image/png');
 
-
+        setOutputImage(false);
         // Send the image data to the backend
         if (imageData) {
             try {
-                const response = await axios.post('http://127.0.0.1:8000/upload-image', {
+                setLoader(true);
+                await axios.post('http://127.0.0.1:8000/upload-image', {
                     image_url: imageData
-                });
-                console.log('image uploaded successfully:', response.data);
-                setOutputImage(true);
+                }).then((response) => {
+                    setLoader(false);
+                    console.log('image uploaded successfully:', response.data);
+                    setOutputImage(true);
+                })
                 // Handle successful upload (e.g., clear form, display success message)
             } catch (error) {
                 console.error('Error uploading image:', error);
@@ -150,7 +156,7 @@ const InpaintingPage = () => {
         link.download = 'Inpainted_Image.jpg'
         link.click();
     }
-    
+
     const backgroundStyles = {
         backgroundImage: `url(${bgImage})`,
         backgroundSize: 'cover',
@@ -159,12 +165,12 @@ const InpaintingPage = () => {
         width: '100vh',
         height: '100vh',
         // You can add more styles as needed
-      };
+    };
 
     return (
         <>
             <div >
-                
+
                 <h1 className="text-4xl mb-10 mt-20 text-center ">Remove small deformities from your image</h1>
                 <div className="flex gap-10 justify-center items-center">
                     <div className='border-2 border-gray-900  grid align-middle justify-center p-7'>
@@ -238,18 +244,22 @@ const InpaintingPage = () => {
                             </div>
                         )}
                     </div>
-                    <div className='border-2 border-gray-900 grid w-[340px] h-[340px] align-middle justify-center p-7'>
-                        <div className="h-56 sm:h-64 xl:h-80 2xl:h-96">
+                    <div className='border-2 border-gray-900 grid w-[340px] h-[340px]  p-7'>
+                        <div className="grid content-center justify-center ">
                             {/* Placeholder for Inpainted image */}
-                            <img src={outputImage ? inpaintedImage : ""} width={150} height={150} alt="Ouput Image will be displayed here" />
-                            {outputImage ? (<button onClick={downloadImage} className="border-2 rounded-xl bg-green-500 px-4 py-2 mt-4">Download Image</button>) : (<div> </div>)}
 
+
+                            {loader
+                                ? <Loader />
+                                : (<img src={outputImage ? inpaintedImage : ""} width={150} height={150} alt="Ouput Image will be displayed here" />)
+                            }
+                            {outputImage ? (<button onClick={downloadImage} className="border-2 rounded-xl bg-green-500 px-4 py-2">Download Image</button>) : (<div> </div>)}
                         </div>
                     </div>
                 </div>
             </div>
 
-            <Footer/>
+            <Footer />
         </>
 
     );

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
 
     return (
@@ -8,7 +10,7 @@ const Footer = () => {
                     <div className="row">
 
                         <div className="col-lg-3 col-10 me-auto mb-4">
-                            <h4 className="text-white mb-3"><a href="index.html">Thank</a>You for your support!</h4>
+                            <h4 className="text-white text-xl mb-3 "><Link to="/" className="font-bold">Thank </Link>You for your support!</h4>
 
                         </div>
                     </div>
