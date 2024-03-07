@@ -22,13 +22,14 @@ const LandingPage = () => {
 
     return (
         <>
-            <section className="preloader">
+            {/* <section className="preloader">
                 <div className="spinner">
                     <span className="sk-inner-circle"></span>
                 </div>
-            </section>
+            </section> */}
 
-            <main>
+
+            <main className="font-sans">
 
                 <section className="slick-slideshow">
 
@@ -39,10 +40,10 @@ const LandingPage = () => {
                             <div className="container">
                                 <div className="row">
                                     <div className="col-lg-6 col-10">
-                                        <h1 className="font-bold text-5xl text-white mb-4">Inpaint on your Own</h1>
+                                        <h1 className="font-bold text-5xl text-white mb-4 ">Inpaint on your Own</h1>
 
                                         {/* <a href="about.html" className="btn custom-btn">Paint Here!</a> */}
-                                        <button className="btn custom-btn" onClick={handleClick} >Paint Here!</button>
+                                        <button className="btn custom-btn " onClick={handleClick} >Paint Here!</button>
 
                                     </div>
                                 </div>
@@ -58,13 +59,13 @@ const LandingPage = () => {
                         <div className="row">
 
                             <div className="col-12 text-center">
-                                <h2 className="font-bold text-4xl mb-5 mt-12">Get started with Image <span>Inpainting</span></h2>
+                                <h2 className="font-bold text-4xl mb-5 mt-12 ">Get started with Image <span>Inpainting</span></h2>
                             </div>
 
                             <div className="col-lg-2 col-12 mt-auto mb-auto">
                                 <ul className="nav nav-pills mb-5 mx-auto justify-content-center align-items-center" id="pills-tab" role="tablist">
                                     <li className="nav-item" role="presentation">
-                                        <button className="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true"><span className="font-bold text-2xl">Introduction</span></button>
+                                        <button className="nav-link active " id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true"><span className="font-bold text-2xl">Introduction</span></button>
                                     </li>
                                 </ul>
                             </div>
@@ -80,8 +81,8 @@ const LandingPage = () => {
 
                                             <div className="col-lg-5 col-12">
                                                 <div className="d-flex flex-column h-100 ms-lg-4 mt-lg-0 mt-5">
-                                                    <h4 className="font-bold text-2xl mb-3">Correct your <br />Images ,<span>Protect</span> your memories</h4>
-                                                    <p>We understand the value of preserving precious memories captured in photographs. Whether it's an old family portrait, a cherished wedding snapshot, or a vintage photograph showing signs of wear and tear, we're here to help you restore and enhance those images through our advanced image inpainting service.</p>
+                                                    <h4 className="font-bold text-2xl mb-3 ">Correct your <br />Images ,<span>Protect</span> your memories</h4>
+                                                    <p className=" text-justify">We understand the value of preserving precious memories captured in photographs. Whether it's an old family portrait, a cherished wedding snapshot, or a vintage photograph showing signs of wear and tear, we're here to help you restore and enhance those images through our advanced image inpainting service.</p>
 
 
                                                 </div>
@@ -108,9 +109,9 @@ const LandingPage = () => {
                             <div className="col-lg-6 col-12 front-product p-10">
                                 <div className="px-5 py-5 py-lg-0 mb-4">
 
-                                    <h2 className="font-bold text-3xl my-4"><span>Our</span> Service</h2>
+                                    <h2 className="font-bold text-3xl my-4 "><span>Our</span> Service</h2>
 
-                                    <p className="">Restore cherished memories with our damaged photo restoration service. Our expert team specializes in removing scratches, tears, and other imperfections, ensuring your photos remain pristine for years to come. Bid farewell to unwanted objects or distractions, maintaining the integrity of your original image. Alter or reconstruct backgrounds effortlessly , seamlessly blending removed portions for a flawless, natural-looking result.</p>
+                                    <p className=" text-justify">Restore cherished memories with our damaged photo restoration service. Our expert team specializes in removing scratches, tears, and other imperfections, ensuring your photos remain pristine for years to come. Bid farewell to unwanted objects or distractions, maintaining the integrity of your original image. Alter or reconstruct backgrounds effortlessly , seamlessly blending removed portions for a flawless, natural-looking result.</p>
 
 
                                 </div>

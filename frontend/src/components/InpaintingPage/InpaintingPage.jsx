@@ -169,7 +169,7 @@ const InpaintingPage = () => {
 
     return (
         <>
-            <div >
+            <div className='font-sans'>
 
                 <h1 className="text-4xl mb-10 mt-20 text-center ">Remove small deformities from your image</h1>
                 <div className="flex gap-10 justify-center items-center">
@@ -253,7 +253,7 @@ const InpaintingPage = () => {
                                 ? <Loader />
                                 : (<img src={outputImage ? inpaintedImage : ""} width={150} height={150} alt="Ouput Image will be displayed here" />)
                             }
-                            {outputImage ? (<button onClick={downloadImage} className="border-2 rounded-xl bg-green-500 px-4 py-2">Download Image</button>) : (<div> </div>)}
+                            {outputImage ? (<button onClick={downloadImage} className="border-2 rounded-xl bg-green-500 px-4 py-2 mt-4">Download Image</button>) : (<div> </div>)}
                         </div>
                     </div>
                 </div>
