@@ -14,6 +14,7 @@ import cv2
 import numpy as np
 from keras.models import load_model
 from numpy.random import randint
+from keras.preprocessing.image import img_to_array, load_img
 
 image_horizontal=128
 image_vertical=128
@@ -36,24 +37,16 @@ app.add_middleware(
 class ImageBaseModel(BaseModel):
     image_url: str
 
-def load_and_resize_images(folder_path, target_size=(image_horizontal, image_vertical)):
-    images_list = []
+def load_and_resize_images(folder_path, size=(image_horizontal, image_vertical)):
+    src_list = []
     for filename in os.listdir(folder_path):
-        # Check if the file is an image file
-        if filename.endswith(('.png', '.jpg', '.jpeg')):
-            file_path = os.path.join(folder_path, filename)
-            try:
-                # Open the image file
-                img = Image.open(file_path)
-                # Resize the image
-                img_resized = img.resize(target_size)
-                # Convert image to array
-                img_array = np.array(img_resized)
-                # Append the image array to the list
-                images_list.append(img_array)
-            except Exception as e:
-                print(f"Error loading {filename}: {e}")
-    return asarray(images_list)
+      masked_img_path = os.path.join(folder_path, filename)
+      masked_pixels = load_img(masked_img_path, target_size=size)
+      masked_pixels = img_to_array(masked_pixels)
+      src_list.append(masked_pixels)
+
+    src_image=asarray(src_list)
+    return src_image
 
 def preprocess_data(data):
     # load compressed arrays
