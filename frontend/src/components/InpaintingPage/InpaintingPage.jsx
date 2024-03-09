@@ -8,7 +8,7 @@ import Footer from '../Footer/Footer';
 import Loader from '../Loader/Loader';
 
 const InpaintingPage = () => {
-    const [brushSize, setBrushSize] = useState(10);
+    const [brushSize, setBrushSize] = useState(5);
     const [isDrawing, setIsDrawing] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
     const [drawingHistory, setDrawingHistory] = useState([]);
@@ -103,8 +103,8 @@ const InpaintingPage = () => {
                 img.onload = () => {
                     const canvas = document.createElement('canvas');
                     const ctx = canvas.getContext('2d');
-                    canvas.width = 150;
-                    canvas.height = 150;
+                    canvas.width = img.width;
+                    canvas.height = img.height;
                     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                     const resizedImage = canvas.toDataURL('image/jpeg');
                     setSelectedImage(resizedImage);
