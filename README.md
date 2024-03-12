@@ -28,7 +28,7 @@ Helps remove small deformities present in you image.
 
 ## Demo
 
-[Demo Link](https://github.com/SauravKumarMahato/ScriptQuin/assets/83631265)
+https://github.com/SauravKumarMahato/Minor_ArtiFuse/assets/89499267/41fe1778-5edd-4071-86df-f530227427f5
 
 ## Installation
 
