@@ -14,6 +14,7 @@ const InpaintingPage = () => {
     const [drawingHistory, setDrawingHistory] = useState([]);
     const [outputImage, setOutputImage] = useState(false);
     const [loader, setLoader] = useState(false);
+    const [imageSrc, setImageSrc] = useState('');
 
     const canvasRef = useRef(null);
     const navigate = useNavigate();
@@ -143,6 +144,21 @@ const InpaintingPage = () => {
                 console.error('Error uploading image:', error);
                 // Handle upload errors (e.g., display error message)
             }
+
+            try {
+                setLoader(true);
+                const response = await fetch('http://127.0.0.1:8000/get-image');
+                const blob = await response.blob();
+                const imageURL = URL.createObjectURL(blob);
+                setImageSrc(imageURL);
+                console.log(imageURL);
+                setLoader(false);
+
+
+            } catch (error) {
+                console.error('Error fetching image:', error);
+            }
+
         } else {
             console.log("No imageData found.");
         }
@@ -251,7 +267,7 @@ const InpaintingPage = () => {
 
                             {loader
                                 ? <Loader />
-                                : (<img src={outputImage ? inpaintedImage : ""} width={150} height={150} alt="Ouput Image will be displayed here" />)
+                                : (<img src={ imageSrc } width={150} height={150} alt="Ouput Image will be displayed here" />)
                             }
                             {outputImage ? (<button onClick={downloadImage} className="border-2 rounded-xl bg-green-500 px-4 py-2 mt-4">Download Image</button>) : (<div> </div>)}
                         </div>
