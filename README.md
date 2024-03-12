@@ -22,6 +22,7 @@ Restore you images by removing scratches, tears, and other imperfections, ensuri
 - [Installation](#installation)
 - [License](#license)
 - [Authors](#authors)
+
 ## Features
 
 Helps remove small deformities present in you image.
@@ -65,6 +66,8 @@ http://localhost:5173/
 ```
 #### Note: Since the inpainting model has size greater than 100MB permitted by Github to push so, it hasn't been uploaded. Contact the owner for futher details on it.
 
+#### For data preprocessing(masking) and model code, refer the link provided below.
+https://github.com/rajesh-adk-137/Minor_ArtiFuse_GAN_training
 
 ## License
 This project is licensed under the MIT License.
