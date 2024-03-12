@@ -21,7 +21,7 @@ Restore you images by removing scratches, tears, and other imperfections, ensuri
 - [Demo](#demo)
 - [Installation](#installation)
 - [License](#license)
-
+- [Authors](#authors)
 ## Features
 
 Helps remove small deformities present in you image.
@@ -68,3 +68,11 @@ http://localhost:5173/
 
 ## License
 This project is licensed under the MIT License.
+
+## Authors
+[Rajesh Adhikari](https://github.com/rajesh-adk-137)
+
+[Sandhya Baral](https://github.com/Sandukkk)
+
+[Saurav Kumar Mahato](https://github.com/SauravKumarMahato)
+
