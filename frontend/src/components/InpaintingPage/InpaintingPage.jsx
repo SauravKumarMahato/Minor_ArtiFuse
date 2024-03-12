@@ -267,7 +267,7 @@ const InpaintingPage = () => {
 
                             {loader
                                 ? <Loader />
-                                : (<img src={ imageSrc } width={150} height={150} alt="Ouput Image will be displayed here" />)
+                                : (<img src={ outputImage ? imageSrc: "" } width={150} height={150} alt="Ouput Image will be displayed here" />)
                             }
                             {outputImage ? (<button onClick={downloadImage} className="border-2 rounded-xl bg-green-500 px-4 py-2 mt-4">Download Image</button>) : (<div> </div>)}
                         </div>
