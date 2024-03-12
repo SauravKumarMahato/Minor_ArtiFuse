@@ -22,7 +22,7 @@ Restore you images by removing scratches, tears, and other imperfections, ensuri
 - [Installation](#installation)
 - [License](#license)
 - [Authors](#authors)
-- []
+
 ## Features
 
 Helps remove small deformities present in you image.
