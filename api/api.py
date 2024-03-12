@@ -15,6 +15,8 @@ import numpy as np
 from keras.models import load_model
 from numpy.random import randint
 from keras.preprocessing.image import img_to_array, load_img
+from fastapi.responses import FileResponse
+from pathlib import Path
 
 image_horizontal=128
 image_vertical=128
@@ -142,13 +144,21 @@ async def upload_image(image: ImageBaseModel):
         with open(os.path.join(upload_folder, filename), "wb") as f:
             f.write(image_bytes)
 
-        get_inpainted_image()
+        get_inpainted_image()   
+        
         return {"message": "Image uploaded successfully!"}
 
 
     except Exception as e:
         print("error occured")
         return JSONResponse(status_code=500, content={"message": f"An error occurred: {str(e)}"})
+
+@app.get("/get-image")
+async def get_image():
+    image_path = Path("./generated_image.jpg")
+    if not image_path.is_file():
+        return {"error": "Image not found on the server"}
+    return FileResponse(image_path)
 
 # Run the FastAPI server
 if __name__ == "__main__":
