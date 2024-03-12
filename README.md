@@ -35,10 +35,10 @@ Helps remove small deformities present in you image.
 1. Clone the repository:
 
 ```bash
-git@github.com:SauravKumarMahato/ScriptQuin.gitMinor_ArtiFuse
+https://github.com/SauravKumarMahato/Minor_ArtiFuse/
 ```
 
-2. Install requirements.txt (required in backend, using venv any other)
+2. Install requirements.txt (required for backend, use venv or any other virtual environment)
 ```bash
 pip install -r requirements.txt
 ```
