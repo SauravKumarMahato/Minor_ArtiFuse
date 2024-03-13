@@ -1,4 +1,4 @@
-# Image Inpainting
+# Image Inpainting with GAN
 
 ## Description
 
