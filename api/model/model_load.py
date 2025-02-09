@@ -38,7 +38,7 @@ print(f"Number of images loaded: {len(images)}")
 
 print('Loaded: ', images.shape)
 
-model = load_model('./Model.h5')
+model = load_model('./generator_model.h5')
 
 def preprocess_data(data):
     # load compressed arrays
