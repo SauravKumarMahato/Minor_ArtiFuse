@@ -64,7 +64,7 @@ python app.py
 ```bash 
 http://localhost:5173/
 ```
-#### Note: Since the inpainting model has size greater than 100MB permitted by Github to push so, it hasn't been uploaded. Contact the owner for futher details on it.
+#### Note: Since the inpainting model has size greater than 100MB permitted by Github to push so, it hasn't been uploaded. You can refer to this [README.md](./frontend/README.md) 
 
 #### For data preprocessing(masking) and model code, refer the link provided below.
 https://github.com/rajesh-adk-137/Minor_ArtiFuse_GAN_training
